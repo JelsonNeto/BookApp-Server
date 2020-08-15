@@ -17,4 +17,5 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
-Route.get('/teste' , 'Livraria/LivrariaController.Adicionar')
+Route.get('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
+Route.get('/addLeitor' , 'Leitor/LeitorController.Adicionar')

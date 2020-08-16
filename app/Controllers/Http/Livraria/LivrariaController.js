@@ -1,13 +1,23 @@
 'use strict'
-const livraria = use('App/Models/Livraria/Livraria') //
+/**autor : BookApp-Devs */
+const livraria = use('App/Models/Livraria/Livraria')
 const livrariaModel = new livraria()
+const crypto = require('crypto')
+const toJson = use('App/Helpers/Json')
 class LivrariaController {
 
- async Adicionar({response}) {
-    let dados = [0, 'Jelson Neto','012912','Teste','jelsonneto94@gmail.com' , '941926369','','1234']
-    let result = await livrariaModel.Adicionar(dados)
-    
-    response.json(result)
+/**
+ * 
+ * @param {*} param0 
+ */
+ async Adicionar({response, request}) {
+     
+   let {pkLivraria ,NomeLivraria,nif,endereco,email,telefone1,telefone2,senha} = request.all() //Obtendo os dados
+   let password = crypto.createHash('md5').update(String(senha)).digest("hex") //Encriptando as senhas
+   let dados = [pkLivraria,NomeLivraria,nif,endereco,email,telefone1,telefone2,senha] //Criando o array com os dados
+   let result = await livrariaModel.Adicionar(dados) //inserindo os dados
+   let formatoJson  = toJson.Create(result)
+    response.json(formatoJson)
  }
 
 }

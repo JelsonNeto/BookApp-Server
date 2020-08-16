@@ -17,7 +17,7 @@ const toJson = {
         {
             code:201,
             status:'Ok',
-            message:'Livraria inserida com sucesso',
+            message:'Inserção feita com sucesso',
             data:''
         }
         return format

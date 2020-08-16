@@ -14,7 +14,8 @@ class LivrariaController {
      
    let {pkLivraria ,NomeLivraria,nif,endereco,email,telefone1,telefone2,senha} = request.all() //Obtendo os dados
    let password = crypto.createHash('md5').update(String(senha)).digest("hex") //Encriptando as senhas
-   let dados = [pkLivraria,NomeLivraria,nif,endereco,email,telefone1,telefone2,senha] //Criando o array com os dados
+   let dados = [pkLivraria,NomeLivraria,nif,endereco,email,telefone1,telefone2,password] //Criando o array com os dados
+   console.log(dados);
    let result = await livrariaModel.Adicionar(dados) //inserindo os dados
    let formatoJson  = toJson.Create(result)
     response.json(formatoJson)

@@ -18,4 +18,4 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 Route.post('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
-Route.get('/addLeitor' , 'Leitor/LeitorController.Adicionar')
+Route.post('/addLeitor' , 'Leitor/LeitorController.Adicionar')

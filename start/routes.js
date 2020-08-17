@@ -17,5 +17,10 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+// Livraria
 Route.post('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
+Route.post('/addLivro' , 'Livraria/LivroController.Adicionar')
+
+// Leitor
 Route.post('/addLeitor' , 'Leitor/LeitorController.Adicionar')
+

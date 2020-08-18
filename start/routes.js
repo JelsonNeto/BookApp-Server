@@ -24,5 +24,6 @@ Route.group(() => {
      * @returns o token
      */
     Route.post('/login','Autenticacao/AutenticacaoController.Login') 
+    Route.post('/AdicionarLivrosVenda', 'LivrosVenda/Livros_Venda.Adicionar')
 }).prefix('api')
 

@@ -17,7 +17,7 @@ class LivroController {
    let formatoJson  = toJson.Create(result)
    response.json(formatoJson)
  }
-
+ 
 }
 
 module.exports = LivroController

@@ -7,7 +7,7 @@ class Livro extends Model {
 
     Adicionar( dados ) {
       return  database
-          .raw('call STP_LIVRO_INSERT_UPDATE(?,?,?,?,?,?,?,?,?,?,?,?)',dados) //Chamando a procedure
+          .raw('call STP_LIVRO_INSERT_UPDATE(?,?,?,?,?,?,?,?,?,?,?)',dados) //Chamando a procedure
     }
   
 }

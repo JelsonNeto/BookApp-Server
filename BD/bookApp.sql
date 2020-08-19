@@ -78,12 +78,13 @@ CREATE TABLE IF NOT EXISTS `livro` (
   PRIMARY KEY (`pkLivro`),
   KEY `FK_livro_usuario` (`fkUsuario`),
   CONSTRAINT `FK_livro_usuario` FOREIGN KEY (`fkUsuario`) REFERENCES `usuario` (`pkUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table bookapp-bd.livro: ~1 rows (approximately)
+-- Dumping data for table bookapp-bd.livro: ~2 rows (approximately)
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
 INSERT INTO `livro` (`pkLivro`, `titulo`, `autor`, `genero`, `paginas`, `preco`, `publicacao`, `paragrafo`, `descricao`, `imagem`, `data_criacao`, `data_modificacao`, `fkUsuario`) VALUES
-	(1, 'Java Como Programar', 'Deitel', 'Cientifico', '1099', 45000, '10ed', 12, 'Bom', 'Teste.img', '2020-08-18 15:12:36', NULL, 1);
+	(1, 'Java Como Programar', 'Deitel', 'Cientifico', '1099', 45000, '10ed', 12, 'Bom', 'Teste.img', '2020-08-18 15:12:36', NULL, 1),
+	(2, '1', 'C# como Programar', '1', '1999', 45000, 'Teste', 45000, '0', 'img.jgp', '2020-08-19 13:07:18', NULL, 1);
 /*!40000 ALTER TABLE `livro` ENABLE KEYS */;
 
 -- Dumping structure for table bookapp-bd.livros_venda
@@ -103,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `livros_venda` (
   CONSTRAINT `FK__usuario` FOREIGN KEY (`fkUsuario`) REFERENCES `usuario` (`pkUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table bookapp-bd.livros_venda: ~0 rows (approximately)
+-- Dumping data for table bookapp-bd.livros_venda: ~1 rows (approximately)
 /*!40000 ALTER TABLE `livros_venda` DISABLE KEYS */;
 INSERT INTO `livros_venda` (`pkLivroVenda`, `fkLivro`, `nomeLivro`, `fkUsuario`, `usuario`, `preco`, `data_pub_venda`, `status_`) VALUES
 	(1, 1, 'Java como Programar', 1, 'Jeson Neto', 45000, '2020-08-18 15:20:05', 1);
@@ -245,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `data_modificacao` datetime DEFAULT NULL,
   `status_` int(11) NOT NULL,
   KEY `Index 1` (`pkUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table bookapp-bd.usuario: ~1 rows (approximately)
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;

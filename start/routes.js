@@ -17,13 +17,13 @@
 const Route = use('Route')
 //.middleware('RotaAutenticada')
 Route.group(() => {
-    Route.post('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
-    Route.get('/addLeitor' , 'Leitor/LeitorController.Adicionar')
-    /**
-     * @params: telefone,senha
-     * @returns o token
-     */
-    Route.post('/login','Autenticacao/AutenticacaoController.Login') 
+    //Rotas de cadastro
     Route.post('/AdicionarLivrosVenda', 'LivrosVenda/Livros_Venda.Adicionar')
+    Route.post('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
+    Route.post('/addLivro' , 'Livraria/LivroController.Adicionar')
+    Route.post('/addLeitor' , 'Leitor/LeitorController.Adicionar')
+    Route.post('/login','Autenticacao/AutenticacaoController.Login')
+
+    //Rotas de Leitura
 }).prefix('api')
 

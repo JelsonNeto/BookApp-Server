@@ -12,13 +12,19 @@ class LeitorController {
      * @param {*} param0 
      */
      async Adicionar({response, request}) {
-       let {pkLeitor,nome,bi,endereco,telefone,email,senha} = request.all() //Obtendo os dados
+       let {pkLeitor,nome,bi,endereco,telefone1,telefone2,email,senha} = request.all() //Obtendo os dados
        let password = crypto.createHash('md5').update(String(senha)).digest("hex") //Encriptando as senhas
-       let dados = [pkLeitor,nome,bi,endereco,telefone,email,password] //Criando o array com os dados
+       let dados = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email,password] //Criando o array com os dados
        let result = await leitorModel.Adicionar(dados) //inserindo os dados
        let formatoJson  = toJson.Create(result)
         response.json(formatoJson)
      }
+
+     async pesquisar({params}) {
+      let dados = [params.elemento] //Criando o array com os dados
+      let result = await leitorModel.pesquisar(dados) //inserindo os dados
+      return result
+    }
     
     }
     

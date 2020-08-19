@@ -22,6 +22,7 @@ Route.group(() => {
     Route.post('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
     Route.post('/addLivro' , 'Livraria/LivroController.Adicionar')
     Route.post('/addLeitor' , 'Leitor/LeitorController.Adicionar')
+    Route.get('/searchLeitor/:elemento' , 'Leitor/LeitorController.pesquisar')
     Route.post('/login','Autenticacao/AutenticacaoController.Login')
 
     //Rotas de Leitura

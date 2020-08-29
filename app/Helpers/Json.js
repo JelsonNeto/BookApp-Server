@@ -8,17 +8,17 @@ const toJson = {
     Create( results ) {
          if(results.length){
              if(results[0].affectedRows !== null) //verifica se a inserção foi feita com sucesso
-              return  this.SucessInsert()
+              return  this.SucessInsert(results[0])
          }
     },
 
-    SucessInsert() {
+    SucessInsert(results) {
         let format = 
         {
             code:201,
             status:'Ok',
             message:'Inserção feita com sucesso',
-            data:''
+            data:results
         }
         return format
     }

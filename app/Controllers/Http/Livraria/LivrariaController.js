@@ -17,7 +17,7 @@ class LivrariaController {
    let dados = [pkLivraria,nome,nif,endereco,email,telefone1,telefone2,password] //Criando o array com os dados
    let result = await livrariaModel.Adicionar(dados) //inserindo os dados
    let formatoJson  = toJson.Create(result)
-   formatoJson.data = [pkLivraria,nome,nif,endereco,email,telefone1,telefone2]
+   formatoJson.data.unshift({'nome':nome,'nif':nif,'endereco':endereco,'email':email,'telefone1':telefone1,'telefone2':telefone2})
     response.json(formatoJson)
  }
 

@@ -18,8 +18,7 @@ class LeitorController {
        let result = await leitorModel.Adicionar(dados) //inserindo os dados
        let formatoJson  = toJson.Create(result)
        formatoJson.data = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email]
-       formatoJson.data.unshift({'nome':nome,'bi':bi,'endereco':endereco,'telefone1':telefone1,'telefone2':telefone2,'email':email})
-        response.json(formatoJson)
+       response.json(formatoJson)
      }
 
      async pesquisar({params}) {

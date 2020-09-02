@@ -12,12 +12,12 @@ class LeitorController {
      * @param {*} param0 
      */
      async Adicionar({response, request}) {
-       let {pkLeitor,nome,bi,endereco,telefone1,telefone2,email,senha} = request.all() //Obtendo os dados
+       let {pkLeitor,nome,bi,endereco,telefone1,telefone2,email,senha,foto} = request.all() //Obtendo os dados
        let password = crypto.createHash('md5').update(String(senha)).digest("hex") //Encriptando as senhas
-       let dados = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email,password] //Criando o array com os dados
+       let dados = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email,password,foto] //Criando o array com os dados
        let result = await leitorModel.Adicionar(dados) //inserindo os dados
        let formatoJson  = toJson.Create(result)
-       formatoJson.data = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email]
+       formatoJson.data = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email,foto]
        response.json(formatoJson)
      }
 

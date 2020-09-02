@@ -7,7 +7,7 @@ class Livraria extends Model {
 
     Adicionar( dados ) {
       return  database
-          .raw('call STP_LIVRARIA_INSERT_UPDATE(?,?,?,?,?,?,?,?)',dados) //Chamando a procedure
+          .raw('call STP_LIVRARIA_INSERT_UPDATE(?,?,?,?,?,?,?,?,?)',dados) //Chamando a procedure
     }
   
     ListarLivrarias( ) {

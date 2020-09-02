@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS `leitor` (
   `nome` varchar(50) NOT NULL,
   `bi` varchar(50) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
-  `telefone` varchar(50) NOT NULL,
+  `telefone1` varchar(50) DEFAULT NULL,
+  `telefone2` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `data_criacao` datetime DEFAULT NULL,
   `data_modificacao` datetime NOT NULL,
@@ -146,7 +147,8 @@ CREATE PROCEDURE `STP_Leitor_INSERT_UPDATE`(
 	IN `endereco` VARCHAR(50),
 	IN `telefone` VARCHAR(50),
 	IN `email` VARCHAR(50),
-	IN `senha` VARCHAR(50)
+	IN `senha` VARCHAR(50),
+    IN `foto` VARCHAR(150)
 )
 BEGIN
  DECLARE errno INT;
@@ -161,8 +163,8 @@ BEGIN
     if(pkLeitor=0) then
     INSERT INTO `leitor`(`pkLeitor`, `nome`, `bi`, `endereco`, `telefone1`, telefone2,`email`, `data_criacao`, `data_modificacao`, `status_`) VALUES (null,nome,bi,endereco,telefone1,telefone2,email,now(),now(),1);
     SET @pkLeitor = LAST_INSERT_ID();
-    INSERT INTO usuario (pkUsuario, `username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
-				VALUES  (null,nome,email,senha,@pkLeitor,1,now(),now(),1);
+    INSERT INTO usuario (pkUsuario, `username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`,foto)
+				VALUES  (null,nome,email,senha,@pkLeitor,1,now(),now(),1,foto);
 select leitor.pkLeitor, leitor.nome, leitor.bi, leitor.endereco, leitor.telefone1, leitor.telefone2,leitor.email from leitor order by leitor.pkLeitor desc limit 1;
 	 
     end if;
@@ -179,7 +181,8 @@ CREATE PROCEDURE `STP_LIVRARIA_INSERT_UPDATE`(
 	IN `email` VARCHAR(50),
 	IN `telefone1` VARCHAR(50),
 	IN `telefone2` VARCHAR(50),
-	IN `senha` VARCHAR(50)
+	IN `senha` VARCHAR(50),
+    IN `foto` VARCHAR(150)
 )
 BEGIN 
 
@@ -198,8 +201,8 @@ BEGIN
     		INSERT INTO livraria (`nome`,`nif`,`endereco`,`email`,`telefone1`,`telefone2`,`data_criacao`,`data_modificacao`,`status_`)
 				 VALUES  ( nome , nif, endereco , email , telefone1 , telefone2 , NOW()      ,   now()            ,   1 );
     		SET @pkLivraria = LAST_INSERT_ID();
-    		INSERT INTO usuario (`username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
-				VALUES  ( nome    ,  email ,  senha, @pkLivraria , 2          ,  NOW()       ,  now()           , 1 );
+    		INSERT INTO usuario (`username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`,foto)
+				VALUES  ( nome    ,  email ,  senha, @pkLivraria , 2          ,  NOW()       ,  now()           , 1,foto );
                 select livraria.pkLivraria,livraria.nome,livraria.nif,livraria.endereco,livraria.email,livraria.telefone1,livraria.telefone2 from livraria order by livraria.pkLivraria desc limit 1;
 
 	  END if;            
@@ -244,6 +247,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `data_criacao` datetime NOT NULL,
   `data_modificacao` datetime DEFAULT NULL,
   `status_` int(11) NOT NULL,
+  `foto` varchar(150) NOT NULL,
   KEY `Index 1` (`pkUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 

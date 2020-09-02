@@ -26,6 +26,13 @@ class LeitorController {
       let result = await leitorModel.pesquisar(dados) //inserindo os dados
       return result
     }
+
+    async ListarLeitores({response, request}) {
+     
+      let result = await leitorModel.ListarLeitores() //inserindo os dados
+     let formatoJson  = toJson.Create(result)
+     response.json(formatoJson)
+   }
     
     }
     

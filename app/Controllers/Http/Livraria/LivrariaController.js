@@ -20,6 +20,13 @@ class LivrariaController {
    response.json(formatoJson)
  }
 
+ async ListarLivrarias({response, request}) {
+     
+  let result = await livrariaModel.ListarLivrarias() //inserindo os dados
+ let formatoJson  = toJson.Create(result)
+ response.json(formatoJson)
+}
+
 }
 
 module.exports = LivrariaController

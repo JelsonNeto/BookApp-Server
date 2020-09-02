@@ -18,6 +18,12 @@ class LivroController {
    response.json(formatoJson)
  }
  
+ async ListarLivros({response, request}) {
+     
+   let result = await livroModel.ListarLivros() //inserindo os dados
+  let formatoJson  = toJson.Create(result)
+  response.json(formatoJson)
+}
 }
 
 module.exports = LivroController

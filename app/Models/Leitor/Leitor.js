@@ -13,6 +13,11 @@ class Leitor extends Model {
         return  database
             .raw('call STP_Pesquisar_Leitor(?)',dados) //Chamando a procedure
       }    
+
+      ListarLeitores() {
+        return  database
+            .raw('SELECT `leitor`.`pkLeitor`,`leitor`.`nome`,`leitor`.`bi`,`leitor`.`endereco`,`leitor`.`telefone1`,`leitor`.`telefone2`,`leitor`.`email`,`leitor`.`data_criacao`,`leitor`.`data_modificacao`,`leitor`.`status_` FROM `bookapp`.`leitor` limit 100;') 
+      } 
 }
 
 module.exports = Leitor

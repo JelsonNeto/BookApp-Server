@@ -22,9 +22,15 @@ Route.group(() => {
     Route.post('/addLivraria' , 'Livraria/LivrariaController.Adicionar')
     Route.post('/addLivro' , 'Livraria/LivroController.Adicionar')
     Route.post('/addLeitor' , 'Leitor/LeitorController.Adicionar')
-    Route.get('/searchLeitor/:elemento' , 'Leitor/LeitorController.pesquisar')
     Route.post('/login','Autenticacao/AutenticacaoController.Login')
 
     //Rotas de Leitura
+    Route.get('/ListarLivrosAVenda' , 'LivrosVenda/Livros_Venda.ListarLivrosAVenda')
+    Route.get('/ListarLivrarias' , 'Livraria/LivrariaController.ListarLivrarias')
+    Route.get('/ListarLivros' , 'Livraria/LivroController.ListarLivros')
+    Route.get('/ListarLeitores' , 'Leitor/LeitorController.ListarLeitores')
+    Route.get('/ListarUsuarios' , 'Usuario/UsuarioController.ListarUsuarios')
+    Route.get('/searchLeitor/:elemento' , 'Leitor/LeitorController.pesquisar')
+
 }).prefix('api')
 

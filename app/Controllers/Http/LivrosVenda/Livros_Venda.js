@@ -15,6 +15,13 @@ class LivrosVendaController {
          let formatoJson  = toJson.Create(result)
          response.json(formatoJson)
     }
+
+    async ListarLivrosAVenda({response, request}) {
+     
+        let result = await livrosVendaModel.ListarLivrosAVenda() //inserindo os dados
+       let formatoJson  = toJson.Create(result)
+       response.json(formatoJson)
+     }
 }
 
 module.exports = LivrosVendaController

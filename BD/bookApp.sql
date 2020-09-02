@@ -159,11 +159,11 @@ BEGIN
     END;
     START TRANSACTION;
     if(pkLeitor=0) then
-    INSERT INTO leitor(nome, bi, endereco, telefone, email, data_criacao, data_modificacao, status_) 
-    VALUES (nome,bi,endereco,telefone,email,now(),now(),1);
+    INSERT INTO `leitor`(`pkLeitor`, `nome`, `bi`, `endereco`, `telefone1`, telefone2,`email`, `data_criacao`, `data_modificacao`, `status_`) VALUES (null,nome,bi,endereco,telefone1,telefone2,email,now(),now(),1);
     SET @pkLeitor = LAST_INSERT_ID();
-    INSERT INTO usuario (username,`email`,`password`,`telefone`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
-				VALUES  (nome,email,senha, telefone , @pkLeitor,1,now(),now(),1);
+    INSERT INTO usuario (pkUsuario, `username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
+				VALUES  (null,nome,email,senha,@pkLeitor,1,now(),now(),1);
+select leitor.pkLeitor, leitor.nome, leitor.bi, leitor.endereco, leitor.telefone1, leitor.telefone2,leitor.email from leitor order by leitor.pkLeitor desc limit 1;
 	 
     end if;
 END//
@@ -195,14 +195,13 @@ BEGIN
     
     if(pkLivraria=0) then
     
-    		INSERT INTO livraria (`pkLivraria`,`nome`,`nif`,`endereco`,`email`,`telefone1`,`telefone2`,`data_criacao`,`data_modificacao`,`status_`)
-				 VALUES  ( NULL       ,   nome , nif, endereco , email , telefone1 , telefone2 , NOW()      ,   NULL            ,   1 );
-    
+    		INSERT INTO livraria (`nome`,`nif`,`endereco`,`email`,`telefone1`,`telefone2`,`data_criacao`,`data_modificacao`,`status_`)
+				 VALUES  ( nome , nif, endereco , email , telefone1 , telefone2 , NOW()      ,   now()            ,   1 );
     		SET @pkLivraria = LAST_INSERT_ID();
-    		
-    		INSERT INTO usuario (`pkUsuario`,`username`,`email`,`password`, `telefone` , `idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
-							VALUES  ( NULL      ,  nome    ,  email ,  senha   ,telefone1, @pkLivraria , 2          ,  NOW()       ,  NULL             , 1 );
-	 
+    		INSERT INTO usuario (`username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
+				VALUES  ( nome    ,  email ,  senha, @pkLivraria , 2          ,  NOW()       ,  now()           , 1 );
+                select livraria.pkLivraria,livraria.nome,livraria.nif,livraria.endereco,livraria.email,livraria.telefone1,livraria.telefone2 from livraria order by livraria.pkLivraria desc limit 1;
+
 	  END if;            
    	
  COMMIT WORK;  

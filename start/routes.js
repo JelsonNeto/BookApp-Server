@@ -15,7 +15,8 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-//.middleware('RotaAutenticada')
+//.middleware('RotaAutenticada') --Caso queiram que as rotas fiquem autenticadas , basta colocar esse middleware em cada rotas ou 
+// No proprio grupo de rotas
 Route.group(() => {
     //Rotas de cadastro
     Route.post('/AdicionarLivrosVenda', 'LivrosVenda/Livros_Venda.Adicionar')

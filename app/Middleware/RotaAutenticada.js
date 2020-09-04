@@ -10,6 +10,10 @@ class RotaAuntenticada{
         else{
             let Bearer = header.authorization.split(' ') //Verifica se o token não é indefinido
             if( Bearer[1] !== undefined ) { 
+                request.usuario = Bearer[1] // ---Alterando a requisição para passar o pkUsuario
+                //
+                     //-Restante dos dados
+                //
                     await next() //Passa para o proximo middleware da rota
             }else
                 response.sendStatus(403);

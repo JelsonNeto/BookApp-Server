@@ -17,7 +17,6 @@ class LeitorController {
        let dados = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email,password,foto] //Criando o array com os dados
        let result = await leitorModel.Adicionar(dados) //inserindo os dados
        let formatoJson  = toJson.Create(result)
-       formatoJson.data = [pkLeitor,nome,bi,endereco,telefone1,telefone2,email,foto]
        response.json(formatoJson)
      }
 

@@ -145,7 +145,8 @@ CREATE PROCEDURE `STP_Leitor_INSERT_UPDATE`(
 	IN `nome` VARCHAR(50),
 	IN `bi` VARCHAR(50),
 	IN `endereco` VARCHAR(50),
-	IN `telefone` VARCHAR(50),
+	IN `telefone1` VARCHAR(50),
+    IN `telefone2` VARCHAR(50),
 	IN `email` VARCHAR(50),
 	IN `senha` VARCHAR(50),
     IN `foto` VARCHAR(150)

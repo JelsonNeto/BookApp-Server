@@ -11,9 +11,9 @@ class Livro extends Model {
     }
   
 
-    ListarLivros( ) {
+    ListarLivros(idUsuario) {
         return  database
-            .raw('SELECT livro.pkLivro,livro.titulo,livro.autor,livro.genero,livro.paginas,livro.preco,livro.publicacao,livro.paragrafo,livro.descricao,livro.imagem,livro.data_criacao,livro.data_modificacao,livro.fkUsuario FROM bookapp.livro limit 100;') ;
+            .raw('SELECT livro.pkLivro,livro.titulo,livro.autor,livro.genero,livro.paginas,livro.preco,livro.publicacao,livro.paragrafo,livro.descricao,livro.imagem,livro.data_criacao,livro.data_modificacao,livro.fkUsuario FROM bookapp.livro WHERE fkUsuario = ?   ORDER BY pkLivro DESC limit 100;',[idUsuario]) ;
       }
 }
 

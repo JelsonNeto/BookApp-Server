@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `leitor` (
 
 -- Dumping structure for table bookapp-bd.livraria
 CREATE TABLE IF NOT EXISTS `livraria` (
-  `pkLivraria` int(11) NOT NULL AUTO_INCREMENT,
+    `pkLivraria` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) DEFAULT NULL,
   `nif` varchar(50) DEFAULT NULL,
   `endereco` varchar(50) DEFAULT NULL,
@@ -49,6 +49,10 @@ CREATE TABLE IF NOT EXISTS `livraria` (
   KEY `Index 1` (`pkLivraria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
+
+
+
+
 -- Dumping data for table bookapp-bd.livraria: ~6 rows (approximately)
 /*!40000 ALTER TABLE `livraria` DISABLE KEYS */;
 INSERT INTO `livraria` (`pkLivraria`, `nome`, `nif`, `endereco`, `email`, `telefone1`, `telefone2`, `data_criacao`, `data_modificacao`, `status_`) VALUES
@@ -59,6 +63,32 @@ INSERT INTO `livraria` (`pkLivraria`, `nome`, `nif`, `endereco`, `email`, `telef
 	(7, 'Teste-Nome', '019191', 'jksdkjsdn', 'jelsonneto93@gmail.com', '941926369', NULL, '2020-08-16 11:59:10', NULL, 1),
 	(8, 'Teste-Nome', '019191', 'jksdkjsdn', 'jelsonneto93@gmail.com', '941926369', NULL, '2020-08-16 12:01:13', NULL, 1);
 /*!40000 ALTER TABLE `livraria` ENABLE KEYS */;
+
+
+
+-- Dumping structure for table bookapp-bd.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `pkUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `telefone` varchar(50) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `tipoUsuario` int(11) NOT NULL,
+  `data_criacao` datetime NOT NULL,
+  `data_modificacao` datetime DEFAULT NULL,
+  `status_` int(11) NOT NULL,
+  KEY `Index 1` (`pkUsuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table bookapp-bd.usuario: ~1 rows (approximately)
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` (`pkUsuario`, `username`, `email`, `password`, `telefone`, `idUsuario`, `tipoUsuario`, `data_criacao`, `data_modificacao`, `status_`) VALUES
+	(1, 'Jelson Neto', 'jelsonneto94@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '941926369', 4, 2, '2020-08-15 16:06:11', NULL, 1);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
+
+
 
 -- Dumping structure for table bookapp-bd.livro
 CREATE TABLE IF NOT EXISTS `livro` (
@@ -79,6 +109,9 @@ CREATE TABLE IF NOT EXISTS `livro` (
   KEY `FK_livro_usuario` (`fkUsuario`),
   CONSTRAINT `FK_livro_usuario` FOREIGN KEY (`fkUsuario`) REFERENCES `usuario` (`pkUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+
 
 -- Dumping data for table bookapp-bd.livro: ~2 rows (approximately)
 /*!40000 ALTER TABLE `livro` DISABLE KEYS */;
@@ -137,6 +170,10 @@ BEGIN
 END//
 DELIMITER ;
 
+
+
+
+
 -- Dumping structure for procedure bookapp-bd.STP_Leitor_INSERT_UPDATE
 DELIMITER //
 CREATE PROCEDURE `STP_Leitor_INSERT_UPDATE`(
@@ -168,6 +205,12 @@ BEGIN
     end if;
 END//
 DELIMITER ;
+
+
+
+
+
+
 
 -- Dumping structure for procedure bookapp-bd.STP_LIVRARIA_INSERT_UPDATE
 DELIMITER //
@@ -209,6 +252,14 @@ BEGIN
 END//
 DELIMITER ;
 
+
+
+
+
+
+
+
+
 -- Dumping structure for procedure bookapp-bd.STP_LIVRO_INSERT_UPDATE
 DELIMITER //
 CREATE PROCEDURE `STP_LIVRO_INSERT_UPDATE`(
@@ -233,26 +284,6 @@ BEGIN
 END//
 DELIMITER ;
 
--- Dumping structure for table bookapp-bd.usuario
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `pkUsuario` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `telefone` varchar(50) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  `tipoUsuario` int(11) NOT NULL,
-  `data_criacao` datetime NOT NULL,
-  `data_modificacao` datetime DEFAULT NULL,
-  `status_` int(11) NOT NULL,
-  KEY `Index 1` (`pkUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
--- Dumping data for table bookapp-bd.usuario: ~1 rows (approximately)
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` (`pkUsuario`, `username`, `email`, `password`, `telefone`, `idUsuario`, `tipoUsuario`, `data_criacao`, `data_modificacao`, `status_`) VALUES
-	(1, 'Jelson Neto', 'jelsonneto94@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', '941926369', 4, 2, '2020-08-15 16:06:11', NULL, 1);
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

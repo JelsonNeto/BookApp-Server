@@ -1,23 +1,51 @@
-'use strict'
+"use strict";
 /**
  * @author BookApp-Devs
  */
-class RotaAuntenticada{
 
-    async handle ({ request, response }, next) {
-        let header = request.request.headers //Obtem o cabeçalho da requisição
-        if(header.authorization === undefined){response.send(403);} //verifica se tem autenticação
-        else{
-            let Bearer = header.authorization.split(' ') //Verifica se o token não é indefinido
-            if( Bearer[1] !== undefined ) { 
-                    await next() //Passa para o proximo middleware da rota
-            }else
-                response.sendStatus(403);
-        }
-       
-         
-      }
+const jwt = require("jsonwebtoken");
 
+const toJson = use('App/Helpers/Json')
+
+class RotaAuntenticada {
+  async handle({ request, response }, next) {
+
+    let errorResponse = toJson.generate(400, "error", "Authorization error ", {})
+
+    let authHeader = request.request.headers.authorization; //Obtem o cabeçalho da requisição
+
+    if (!authHeader) {
+
+      errorResponse.code = 401 
+      errorResponse.message = "Auth Token is missing"
+      return response.status(401).json(errorResponse);
+    }
+
+    const [, token] = authHeader.split(" ");
+
+    try {
+      let decoded = await jwt.verify(token, "1a72675f335798ca0005f056d1ae8b44"); //gera o token
+      let { sub } = decoded;
+
+      // console.log(decoded);
+
+      request.user = {
+        id: sub,
+      };
+
+      console.log("ID IN ROUTA AUTENTICADA " + request.user.id);
+
+      return next();
+    } catch (error) {
+
+      console.log(error)
+
+      errorResponse.code = 401 
+      errorResponse.message = "Invalid JWT Auth Token"
+      return response.status(401).json(errorResponse);
+     
+    }
+  }
 }
 
-module.exports = RotaAuntenticada
+module.exports = RotaAuntenticada;

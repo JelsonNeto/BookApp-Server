@@ -13,6 +13,7 @@ const toJson = {
     },
 
     SucessInsert(results) {
+     
         let format = 
         {
             code:201,
@@ -21,6 +22,19 @@ const toJson = {
             data:results
         }
         return format
+    },
+
+    generate(code,status,message,data){
+        let format = 
+        {
+            code,
+            status,
+            message,
+            data
+        }
+        return format
+
+
     }
 
 }

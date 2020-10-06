@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS `leitor` (
   `nome` varchar(50) NOT NULL,
   `bi` varchar(50) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
-  `telefone` varchar(50) NOT NULL,
+  `telefone1` varchar(50) DEFAULT NULL,
+  `telefone2` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `data_criacao` datetime DEFAULT NULL,
   `data_modificacao` datetime NOT NULL,
@@ -181,9 +182,11 @@ CREATE PROCEDURE `STP_Leitor_INSERT_UPDATE`(
 	IN `nome` VARCHAR(50),
 	IN `bi` VARCHAR(50),
 	IN `endereco` VARCHAR(50),
-	IN `telefone` VARCHAR(50),
+	IN `telefone1` VARCHAR(50),
+    IN `telefone2` VARCHAR(50),
 	IN `email` VARCHAR(50),
-	IN `senha` VARCHAR(50)
+	IN `senha` VARCHAR(50),
+    IN `foto` VARCHAR(150)
 )
 BEGIN
  DECLARE errno INT;
@@ -196,11 +199,11 @@ BEGIN
     END;
     START TRANSACTION;
     if(pkLeitor=0) then
-    INSERT INTO leitor(nome, bi, endereco, telefone, email, data_criacao, data_modificacao, status_) 
-    VALUES (nome,bi,endereco,telefone,email,now(),now(),1);
+    INSERT INTO `leitor`(`pkLeitor`, `nome`, `bi`, `endereco`, `telefone1`, telefone2,`email`, `data_criacao`, `data_modificacao`, `status_`) VALUES (null,nome,bi,endereco,telefone1,telefone2,email,now(),now(),1);
     SET @pkLeitor = LAST_INSERT_ID();
-    INSERT INTO usuario (username,`email`,`password`,`telefone`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
-				VALUES  (nome,email,senha, telefone , @pkLeitor,1,now(),now(),1);
+    INSERT INTO usuario (pkUsuario, `username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`,foto)
+				VALUES  (null,nome,email,senha,@pkLeitor,1,now(),now(),1,foto);
+select leitor.pkLeitor, leitor.nome, leitor.bi, leitor.endereco, leitor.telefone1, leitor.telefone2,leitor.email from leitor order by leitor.pkLeitor desc limit 1;
 	 
     end if;
 END//
@@ -222,7 +225,8 @@ CREATE PROCEDURE `STP_LIVRARIA_INSERT_UPDATE`(
 	IN `email` VARCHAR(50),
 	IN `telefone1` VARCHAR(50),
 	IN `telefone2` VARCHAR(50),
-	IN `senha` VARCHAR(50)
+	IN `senha` VARCHAR(50),
+    IN `foto` VARCHAR(150)
 )
 BEGIN 
 
@@ -238,14 +242,13 @@ BEGIN
     
     if(pkLivraria=0) then
     
-    		INSERT INTO livraria (`pkLivraria`,`nome`,`nif`,`endereco`,`email`,`telefone1`,`telefone2`,`data_criacao`,`data_modificacao`,`status_`)
-				 VALUES  ( NULL       ,   nome , nif, endereco , email , telefone1 , telefone2 , NOW()      ,   NULL            ,   1 );
-    
+    		INSERT INTO livraria (`nome`,`nif`,`endereco`,`email`,`telefone1`,`telefone2`,`data_criacao`,`data_modificacao`,`status_`)
+				 VALUES  ( nome , nif, endereco , email , telefone1 , telefone2 , NOW()      ,   now()            ,   1 );
     		SET @pkLivraria = LAST_INSERT_ID();
-    		
-    		INSERT INTO usuario (`pkUsuario`,`username`,`email`,`password`, `telefone` , `idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`)
-							VALUES  ( NULL      ,  nome    ,  email ,  senha   ,telefone1, @pkLivraria , 2          ,  NOW()       ,  NULL             , 1 );
-	 
+    		INSERT INTO usuario (`username`,`email`,`password`,`idUsuario`,`tipoUsuario`,`data_criacao`,`data_modificacao`,`status_`,foto)
+				VALUES  ( nome    ,  email ,  senha, @pkLivraria , 2          ,  NOW()       ,  now()           , 1,foto );
+                select livraria.pkLivraria,livraria.nome,livraria.nif,livraria.endereco,livraria.email,livraria.telefone1,livraria.telefone2 from livraria order by livraria.pkLivraria desc limit 1;
+
 	  END if;            
    	
  COMMIT WORK;  
